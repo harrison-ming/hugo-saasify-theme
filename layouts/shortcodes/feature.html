@@ -4,16 +4,16 @@
 {{ $badge := .Get "badge" }}
 {{ $badgeColor := .Get "badgeColor" | default "#5573df" }}
 {{ $image := .Get "image" }}
-{{ $buttonText := .Get "buttonText" | default "Learn More" }}
+{{ $imageClass := .Get "imageClass" }}
+{{ $buttonText := .Get "buttonText" | default (i18n "learnMore") }}
 {{ $buttonLink := .Get "buttonLink" | default "#" }}
 {{ $imagePosition := .Get "imagePosition" | default "right" }}
-
-{{ $features := split (.Get "features") "," }}
+{{ $hideButton := .Get "hideButton" }}
 
 <div class="grid lg:grid-cols-2 gap-12 items-center" style="--badge-color: {{ $badgeColor }}">
     {{ if eq $imagePosition "left" }}
     <div class="order-2 lg:order-1">
-        <img src="{{ $image | relURL }}" alt="{{ $title }}" class="rounded-xl shadow-elevation">
+        <img src="{{ $image | relURL }}" alt="{{ $title }}" class="rounded-xl shadow-lg {{ with $imageClass }}{{ . }}{{ end }}">
     </div>
     {{ end }}
 
@@ -27,11 +27,12 @@
                 color: var(--badge-color);
             }
         </style>
-        <div class="badge inline-block px-4 py-2 rounded-full font-medium">{{ $badge }}</div>
+        {{ with $badge }}<div class="badge inline-block px-4 py-2 rounded-full font-medium">{{ . }}</div>{{ end }}
         <h3 class="text-2xl md:text-3xl font-bold">{{ $title }}</h3>
         <p class="text-lg text-gray-600">{{ $description }}</p>
+        {{ with .Get "features" }}
         <ul class="space-y-4">
-            {{ range $features }}
+            {{ range split . "," }}
             <li class="flex items-center space-x-3">
                 <svg class="badge-icon w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
@@ -40,12 +41,15 @@
             </li>
             {{ end }}
         </ul>
+        {{ end }}
+        {{ if ne $hideButton "true" }}
         <a href="{{ $buttonLink }}" class="btn-primary inline-block">{{ $buttonText }}</a>
+        {{ end }}
     </div>
 
     {{ if ne $imagePosition "left" }}
     <div>
-        <img src="{{ $image | relURL }}" alt="{{ $title }}" class="rounded-xl shadow-elevation">
+        <img src="{{ $image | relURL }}" alt="{{ $title }}" class="rounded-xl shadow-lg {{ with $imageClass }}{{ . }}{{ end }}">
     </div>
     {{ end }}
 </div>
