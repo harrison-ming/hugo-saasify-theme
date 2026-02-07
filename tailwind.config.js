@@ -5,16 +5,17 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          50: '#eef1fc',
-          100: '#dde3f9',
-          200: '#bbc7f3',
-          300: '#99abec',
-          400: '#778fe6',
-          500: '#5573df',
-          600: '#425ad6',
-          700: '#3548ab',
-          800: '#283680',
-          900: '#1b2456',
+          50:  '#EEF1FE',
+          100: '#DDE4FD',
+          200: '#BCC9FB',
+          300: '#92A7F5',
+          400: '#6B85F0',
+          500: '#4361EE',
+          600: '#3450D4',
+          700: '#2A40AF',
+          800: '#24368D',
+          900: '#202D72',
+          950: '#151D49',
         },
         secondary: {
           50: '#faf5ff',
@@ -31,7 +32,6 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Plus Jakarta Sans', 'sans-serif'],
       },
     },
   },
