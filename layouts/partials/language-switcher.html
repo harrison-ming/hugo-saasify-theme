@@ -1,18 +1,16 @@
 {{ if hugo.IsMultilingual }}
-{{ $headerConfig := .Site.Params.header }}
-{{ $dropdownConfig := $headerConfig.menu.dropdown }}
 <div class="relative group">
-    <button class="flex items-center {{ with $headerConfig.menu.linkClass }}{{ . }}{{ else }}text-base text-gray-900 hover:text-primary-600 font-bold transition duration-200{{ end }}">
+    <button class="flex items-center text-sm text-gray-700 hover:text-primary-600 font-medium transition-colors duration-150">
         {{ .Site.Language.LanguageName }}
-        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="ml-1 shrink-0" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
         </svg>
     </button>
-    <div class="absolute right-0 mt-2 {{ $dropdownConfig.width | default "w-72" }} opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out">
-        <div class="{{ $dropdownConfig.container_padding | default "py-6" }} {{ $dropdownConfig.background | default "bg-white" }} {{ $dropdownConfig.border | default "border border-gray-100" }} {{ $dropdownConfig.shadow | default "shadow-xl" }} {{ $dropdownConfig.radius | default "rounded-lg" }}">
+    <div class="absolute left-1/2 -translate-x-1/2 mt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out" style="width:7rem">
+        <div class="py-1 bg-white border border-gray-200 shadow-lg rounded-md">
             {{ if $.IsTranslated }}
                 {{ range $.Translations }}
-                <a href="{{ .RelPermalink }}" class="language-switch-link block {{ $dropdownConfig.item_padding | default "px-8 py-3" }} {{ $dropdownConfig.text_size | default "text-sm" }} {{ $dropdownConfig.text_color | default "text-gray-700" }} {{ $dropdownConfig.hover_background | default "hover:bg-gray-50" }}" data-lang="{{ .Language.Lang }}">
+                <a href="{{ .RelPermalink }}" class="language-switch-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors whitespace-nowrap" data-lang="{{ .Language.Lang }}">
                     {{ .Language.LanguageName }}
                 </a>
                 {{ end }}
@@ -20,7 +18,7 @@
                 {{ range .Site.Languages }}
                 {{ if ne $.Site.Language.Lang .Lang }}
                 {{ $langURL := printf "/%s/" .Lang }}
-                <a href="{{ $langURL }}" class="language-switch-link block {{ $dropdownConfig.item_padding | default "px-8 py-3" }} {{ $dropdownConfig.text_size | default "text-sm" }} {{ $dropdownConfig.text_color | default "text-gray-700" }} {{ $dropdownConfig.hover_background | default "hover:bg-gray-50" }}" data-lang="{{ .Lang }}">
+                <a href="{{ $langURL }}" class="language-switch-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors whitespace-nowrap" data-lang="{{ .Lang }}">
                     {{ .LanguageName }}
                 </a>
                 {{ end }}
